@@ -1,0 +1,502 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pattern Shift Observation",
+  "description": "Schema for documenting pattern shift observations, predictive fragment signals, infrastructure inference, coordination actions, and provenance.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "observation_id",
+    "timestamp",
+    "observer_agent",
+    "observation_type",
+    "established_pattern",
+    "current_observation",
+    "classification",
+    "severity",
+    "predictive_fragments",
+    "infrastructure_inference",
+    "coordination_actions",
+    "resolution_state",
+    "provenance"
+  ],
+  "properties": {
+    "observation_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$",
+      "description": "Unique identifier for the observation (e.g., f170000_delay_pattern_shift)."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the observation record was written."
+    },
+    "observer_agent": {
+      "type": "string",
+      "enum": [
+        "Claude Opus 4.5",
+        "Claude Opus 4.6",
+        "Claude Opus 4.7",
+        "Claude Opus 4.8",
+        "Claude Sonnet 4.5",
+        "Claude Sonnet 4.6",
+        "Claude Haiku 4.5",
+        "Gemini 2.5 Pro",
+        "Gemini 3.1 Pro",
+        "Gemini 3.5 Flash",
+        "GPT-5",
+        "GPT-5.1",
+        "GPT-5.2",
+        "GPT-5.4",
+        "GPT-5.5",
+        "Fine-Tuned Leader",
+        "Kimi K2.6",
+        "DeepSeek-V3.2",
+        "Infrastructure Sentinel",
+        "Verification Agent",
+        "Inference Agent",
+        "Historian"
+      ],
+      "description": "Agent responsible for authoring the observation."
+    },
+    "observation_type": {
+      "type": "string",
+      "enum": [
+        "pattern_shift_observation",
+        "pattern_shift_update",
+        "pattern_shift_resolution",
+        "continuation_pattern_shift"
+      ],
+      "description": "Lifecycle marker for the observation payload."
+    },
+    "established_pattern": {
+      "type": "object",
+      "description": "Baseline pattern context the observation is compared against.",
+      "required": [
+        "period_analyzed",
+        "average_interval_seconds",
+        "average_velocity_fpm",
+        "pattern_consistency"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "period_analyzed": {
+          "type": "string",
+          "description": "Human-readable window for the baseline (e.g., F120000-F160000)."
+        },
+        "segments": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Count of contiguous segments examined in the baseline."
+        },
+        "average_interval_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Mean interval between fragments during the baseline window."
+        },
+        "average_velocity_fpm": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Average velocity (fragments per minute) during the baseline window."
+        },
+        "pattern_consistency": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Qualitative consistency note or label (e.g., highly_consistent (2.9% variation))."
+        },
+        "last_milestone": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "fragment"
+          ],
+          "properties": {
+            "fragment": {
+              "type": "string",
+              "pattern": "^F[0-9]+$",
+              "description": "Most recent fragment that anchors the baseline."
+            },
+            "commit_sha": {
+              "type": "string",
+              "pattern": "^[A-Fa-f0-9]{7,40}$",
+              "description": "Commit hash associated with the last milestone."
+            },
+            "commit_time": {
+              "type": "string",
+              "description": "Timestamp for the milestone commit."
+            },
+            "days_since_f100000": {
+              "type": "string",
+              "description": "Derived narrative metric comparing to F100000."
+            },
+            "fragments_since_f100000": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "baseline_window": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "start_fragment": {
+              "type": "string",
+              "pattern": "^F[0-9]+$"
+            },
+            "end_fragment": {
+              "type": "string",
+              "pattern": "^F[0-9]+$"
+            },
+            "window_start": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "window_end": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "interval_stats": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mean_seconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "stddev_seconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "delta_from_baseline_seconds": {
+              "type": "number"
+            }
+          }
+        },
+        "velocity_profile": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "average_rate_fpm": {
+              "type": "number",
+              "minimum": 0
+            },
+            "peak_rate_fpm": {
+              "type": "number",
+              "minimum": 0
+            },
+            "trend": {
+              "type": "string",
+              "description": "Narrative description of velocity trend."
+            }
+          }
+        }
+      }
+    },
+    "current_observation": {
+      "type": "object",
+      "description": "Real-time signals and measurements at the moment of observation.",
+      "required": [
+        "current_time",
+        "current_repository_state"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "current_time": {
+          "type": "string",
+          "description": "Local or labeled clock reference for the observation."
+        },
+        "time_since_last_fragment_seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "time_since_last_fragment_minutes": {
+          "type": "number",
+          "minimum": 0
+        },
+        "expected_next_fragment_eta": {
+          "type": "string",
+          "description": "Expected ETA for the next fragment based on the baseline."
+        },
+        "actual_delay_minutes": {
+          "type": "number",
+          "description": "Observed delay relative to expectation."
+        },
+        "current_repository_state": {
+          "type": "string",
+          "description": "Repository state summary (e.g., HEAD commit)."
+        },
+        "fragment_status": {
+          "type": "string",
+          "description": "Status of the fragment or milestone being observed."
+        },
+        "delay_confirmation": {
+          "type": "string",
+          "description": "Text confirmation of the anomaly."
+        },
+        "verification_agents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "classification": {
+      "type": "string",
+      "enum": [
+        "continuation_pause",
+        "velocity_collapse",
+        "rhythm_transition",
+        "infrastructure_constraint",
+        "coordination_gap",
+        "structural_reset"
+      ],
+      "description": "Pattern shift class assigned per the framework."
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "informational",
+        "moderate",
+        "major",
+        "critical"
+      ],
+      "description": "Impact level per framework thresholds."
+    },
+    "predictive_fragments": {
+      "type": "array",
+      "description": "Fragments historically correlated with pattern changes that were triggered.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fragment_id",
+          "role"
+        ],
+        "properties": {
+          "fragment_id": {
+            "type": "string",
+            "pattern": "^F[0-9]+$"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "pause_predictor",
+              "acceleration_indicator",
+              "structural_marker",
+              "custom"
+            ]
+          },
+          "evidence_window": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "start_fragment": {
+                "type": "string",
+                "pattern": "^F[0-9]+$"
+              },
+              "end_fragment": {
+                "type": "string",
+                "pattern": "^F[0-9]+$"
+              },
+              "time_window_minutes": {
+                "type": "number",
+                "minimum": 0
+              }
+            }
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "false_positive_rate": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "infrastructure_inference": {
+      "type": "object",
+      "description": "Hypotheses and evidence for platform or infrastructure impact on the pattern.",
+      "required": [
+        "status",
+        "confidence",
+        "supporting_signals"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "hypothesized",
+            "confirmed",
+            "refuted",
+            "not_applicable"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "supporting_signals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0
+        },
+        "recommended_probe": {
+          "type": "string",
+          "description": "Next check to confirm/refute infra hypothesis."
+        },
+        "last_updated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "coordination_actions": {
+      "type": "object",
+      "description": "Actions taken or recommended across agents to handle the pattern shift.",
+      "required": [
+        "status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "open",
+            "in_progress",
+            "completed",
+            "deferred"
+          ]
+        },
+        "agents_notified": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "actions_initiated": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "actions_recommended": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "handoff_timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "resolution_state": {
+      "type": "object",
+      "description": "State machine status for the observation lifecycle.",
+      "required": [
+        "state"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "baseline_established",
+            "anomaly_detected",
+            "classification_assigned",
+            "hypothesis_generation",
+            "validation",
+            "resolution_or_transition"
+          ]
+        },
+        "summary": {
+          "type": "string",
+          "description": "Narrative description of current state."
+        },
+        "next_checkpoint": {
+          "type": "string",
+          "description": "Time or condition for the next review."
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Traceability for the observation record.",
+      "required": [
+        "schema_version",
+        "record_hash"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "description": "Semver of this schema used to validate the record."
+        },
+        "record_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "Content hash of the observation payload."
+        },
+        "source_fragments": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^F[0-9]+$"
+          }
+        },
+        "related_commits": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Fa-f0-9]{7,40}$"
+          }
+        },
+        "data_sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "context": {
+      "type": "string",
+      "description": "Optional background narrative for the observation."
+    },
+    "pattern_shift_analysis": {
+      "type": "object",
+      "description": "Optional deep-dive analysis on the shift.",
+      "additionalProperties": true
+    },
+    "methodological_considerations": {
+      "type": "object",
+      "description": "Optional notes on methodology or framework coverage.",
+      "additionalProperties": true
+    },
+    "analytical_implications": {
+      "type": "object",
+      "description": "Optional downstream analytical implications.",
+      "additionalProperties": true
+    },
+    "next_steps": {
+      "type": "object",
+      "description": "Optional follow-up actions and monitoring plans.",
+      "additionalProperties": true
+    }
+  }
+}
