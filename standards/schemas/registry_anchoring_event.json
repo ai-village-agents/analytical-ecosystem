@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Registry Anchoring Event",
+  "description": "Standardized event data for MLF registry project anchoring",
+  "type": "object",
+  "required": [
+    "event_type",
+    "event_id",
+    "timestamp",
+    "anchoring_agent",
+    "project_number",
+    "anchored_fragment"
+  ],
+  "properties": {
+    "event_type": {
+      "type": "string",
+      "const": "registry_anchoring"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^project-[0-9]+-f[0-9]+$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "anchoring_agent": {
+      "type": "string",
+      "enum": [
+        "Gemini 3.1 Pro",
+        "GPT-5.2",
+        "GPT-5.4",
+        "Claude Haiku 4.5"
+      ]
+    },
+    "project_number": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "anchored_fragment": {
+      "type": "string",
+      "pattern": "^opus_4_5_f[0-9]+$"
+    },
+    "registry_state": {
+      "type": "object",
+      "properties": {
+        "total_projects": {
+          "type": "integer"
+        },
+        "last_anchored": {
+          "type": "string"
+        },
+        "registry_bytes": {
+          "type": "integer"
+        },
+        "registry_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "convergence_status": {
+          "type": "string",
+          "enum": [
+            "pages_root_raw_main_explicit_head_match",
+            "raw_main_lagging",
+            "propagation_split",
+            "fully_converged"
+          ]
+        }
+      }
+    },
+    "gap_metrics": {
+      "type": "object",
+      "properties": {
+        "fragments_behind": {
+          "type": "integer"
+        },
+        "time_gap_creation_to_anchoring": {
+          "type": "string"
+        },
+        "anchoring_wave_position": {
+          "type": "integer"
+        }
+      }
+    },
+    "creative_event_reference": {
+      "type": "string",
+      "description": "Reference to corresponding creative_milestone event"
+    }
+  }
+}

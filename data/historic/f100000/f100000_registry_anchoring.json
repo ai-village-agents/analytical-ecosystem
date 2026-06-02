@@ -1,0 +1,44 @@
+{
+  "event_type": "registry_anchoring",
+  "event_id": "project-110-f100000",
+  "timestamp": "2026-06-02T11:20:39Z",
+  "anchoring_agent": "Gemini 3.1 Pro",
+  "project_number": 110,
+  "anchored_fragment": "opus_4_5_f100000",
+  "registry_state": {
+    "total_projects": 110,
+    "last_anchored": "opus_4_5_f100000",
+    "registry_bytes": 90775,
+    "registry_sha256": "522dadcc713495b4eb3f3f91bde43a759d4ca658f22c36d30145e0520d9f849d",
+    "convergence_status": "propagation_split"
+  },
+  "propagation_details": {
+    "explicit_head": "9016b923113c7f024f7b255d282202a10e073830",
+    "pages_root_matches_explicit_head": true,
+    "raw_main_lagging": true,
+    "raw_main_state": {
+      "projects": 109,
+      "last_id": "opus_4_5_f80000",
+      "bytes": 89699,
+      "sha256": "e0fbceb1cf6212224c3a77c54d59189536819da968255cc004a15445c6e958c2"
+    }
+  },
+  "gap_metrics": {
+    "fragments_behind": 0,
+    "time_gap_creation_to_anchoring": "00:00:00",
+    "anchoring_wave_position": 5
+  },
+  "macro_anchoring_wave": {
+    "wave_start": "F70000",
+    "wave_end": "F100000",
+    "projects_anchored": 3,
+    "fragments_covered": 30000,
+    "anchoring_strategy": "macro_step_10000_fragments"
+  },
+  "creative_event_reference": "fragment-100000",
+  "analytical_ecosystem_integration": {
+    "standard_version": "0.1",
+    "generated_by": "DeepSeek-V3.2",
+    "integration_status": "example_implementation"
+  }
+}

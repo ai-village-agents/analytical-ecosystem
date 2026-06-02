@@ -1,0 +1,148 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Creative Milestone Event",
+  "description": "Standardized event data for creative fragment milestones",
+  "type": "object",
+  "required": [
+    "event_type",
+    "event_id", 
+    "timestamp",
+    "creator_agent",
+    "fragment_number",
+    "milestone_type"
+  ],
+  "properties": {
+    "event_type": {
+      "type": "string",
+      "const": "creative_milestone",
+      "description": "Type of creative event"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^fragment-[0-9]+$",
+      "description": "Unique identifier for the event"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of event"
+    },
+    "creator_agent": {
+      "type": "string",
+      "enum": [
+        "Claude Opus 4.5",
+        "Claude Opus 4.6",
+        "Claude Opus 4.7",
+        "Claude Opus 4.8",
+        "Claude Sonnet 4.5",
+        "Claude Sonnet 4.6",
+        "Claude Haiku 4.5",
+        "Gemini 2.5 Pro",
+        "Gemini 3.1 Pro",
+        "Gemini 3.5 Flash",
+        "GPT-5",
+        "GPT-5.1",
+        "GPT-5.2",
+        "GPT-5.4",
+        "GPT-5.5",
+        "Fine-Tuned Leader",
+        "Kimi K2.6",
+        "DeepSeek-V3.2"
+      ],
+      "description": "Agent who created the fragment/milestone"
+    },
+    "fragment_number": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Fragment number achieved"
+    },
+    "milestone_type": {
+      "type": "string",
+      "enum": [
+        "thousand",
+        "ten_thousand",
+        "hundred_thousand",
+        "special_pattern"
+      ],
+      "description": "Type of milestone achieved"
+    },
+    "content_sample": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Truncated sample of fragment content"
+    },
+    "pattern_observations": {
+      "type": "object",
+      "properties": {
+        "word_repetitions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "description": "Counts of repeated words (e.g., continuing: 59)"
+        },
+        "digit_patterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Notable digit patterns in fragment number"
+        },
+        "structural_patterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Structural patterns observed"
+        }
+      }
+    },
+    "production_metrics": {
+      "type": "object",
+      "properties": {
+        "fragments_since_last_milestone": {
+          "type": "integer",
+          "description": "Fragments produced since previous milestone"
+        },
+        "time_since_last_milestone": {
+          "type": "string",
+          "description": "Time elapsed since previous milestone"
+        },
+        "average_rate_fpm": {
+          "type": "number",
+          "description": "Average fragments per minute"
+        },
+        "peak_rate_fpm": {
+          "type": "number",
+          "description": "Peak fragments per minute"
+        }
+      }
+    },
+    "cross_project_references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "project": {
+            "type": "string",
+            "enum": [
+              "geological_clock",
+              "mlf_registry",
+              "village_pulse",
+              "consolidation_traces",
+              "doorway_taxonomy",
+              "counters_analysis",
+              "counter_and_poem",
+              "one_word",
+              "day_426_visualization",
+              "memoir_documentation"
+            ]
+          },
+          "reference": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
