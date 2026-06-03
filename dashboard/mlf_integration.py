@@ -8,7 +8,8 @@ import requests
 import json
 from datetime import datetime
 
-MLF_REGISTRY_URL = "https://raw.githubusercontent.com/ai-village-agents/multi-layered-framework/main/registry.json"
+MLF_REGISTRY_URL = "https://raw.githubusercontent.com/ai-village-agents/multi-layered-framework/main/docs/project_registry.json"
+MLF_EXPLICIT_HEAD_URL = "https://raw.githubusercontent.com/ai-village-agents/multi-layered-framework/main/MLF_EXPLICIT_HEAD.json"
 
 def fetch_mlf_registry():
     """Fetch the current MLF registry data"""
@@ -20,86 +21,59 @@ def fetch_mlf_registry():
         print(f"Error fetching MLF registry: {e}")
         return None
 
-def get_project_148_data(registry_data):
-    """Extract data for Project 148 (Analytical Ecosystem Framework)"""
-    if not registry_data or 'projects' not in registry_data:
+def fetch_mlf_explicit_head():
+    """Fetch the explicit head data for convergence checking"""
+    try:
+        response = requests.get(MLF_EXPLICIT_HEAD_URL, timeout=10)
+        response.raise_for_status()
+        return response.json()
+    except Exception as e:
+        print(f"Error fetching MLF explicit head: {e}")
         return None
-    
-    for project in registry_data['projects']:
-        if project.get('id') == 'analytical_ecosystem_phase_1':
-            return project
-        elif 'Analytical Ecosystem Framework' in project.get('title', ''):
-            return project
-        elif project.get('id') == '148':  # Numeric ID fallback
-            return project
-    
-    return None
-
-def get_framework_neighbors(registry_data):
-    """Get neighboring projects in MLF registry for context"""
-    if not registry_data or 'projects' not in registry_data:
-        return []
-    
-    projects = registry_data['projects']
-    framework_index = -1
-    
-    # Find Project 148 index
-    for i, project in enumerate(projects):
-        if project.get('id') == 'analytical_ecosystem_phase_1' or 'Analytical Ecosystem Framework' in project.get('title', ''):
-            framework_index = i
-            break
-    
-    if framework_index == -1:
-        return []
-    
-    # Get neighboring projects (3 before, 3 after)
-    start = max(0, framework_index - 3)
-    end = min(len(projects), framework_index + 4)
-    
-    neighbors = []
-    for i in range(start, end):
-        if i != framework_index:
-            neighbors.append({
-                'index': i,
-                'id': projects[i].get('id', ''),
-                'title': projects[i].get('title', ''),
-                'type': projects[i].get('type', ''),
-                'url': projects[i].get('url', '')
-            })
-    
-    return neighbors
 
 def get_mlf_stats():
-    """Get overall MLF registry statistics"""
+    """Get overall MLF registry statistics and convergence status"""
     registry_data = fetch_mlf_registry()
-    if not registry_data:
+    head_data = fetch_mlf_explicit_head()
+    
+    if not registry_data or not head_data:
         return {}
     
     projects = registry_data.get('projects', [])
+    registry_count = len(projects)
+    head_count = head_data.get('total_projects', 0)
     
-    # Count projects by type
-    type_counts = {}
-    for project in projects:
-        project_type = project.get('type', 'unknown')
-        type_counts[project_type] = type_counts.get(project_type, 0) + 1
+    is_converged = (registry_count == head_count)
     
+    # Get project 148 (index 147 in list if 1-indexed initially) or by ID
+    framework_project = None
+    for p in projects:
+        if p.get('id') == 'analytical_ecosystem_phase_1':
+            framework_project = p
+            break
+            
+    if not framework_project and len(projects) >= 148:
+        # Fallback to index if title matches
+        if 'Analytical Ecosystem' in projects[147].get('title', '') or 'Analytical Ecosystem' in projects[147].get('name', ''):
+            framework_project = projects[147]
+
     # Get most recent projects
     recent_projects = []
     for i, project in enumerate(projects[-5:]):
         recent_projects.append({
             'id': project.get('id', ''),
-            'title': project.get('title', ''),
+            'title': project.get('name', project.get('title', 'Unknown')),
             'type': project.get('type', ''),
-            'index': len(projects) - 5 + i
+            'index': len(projects) - 5 + i + 1
         })
     
     return {
-        'total_projects': len(projects),
-        'type_distribution': type_counts,
+        'total_projects': registry_count,
+        'head_count': head_count,
+        'is_converged': is_converged,
         'recent_projects': recent_projects,
-        'last_updated': registry_data.get('updated_at', ''),
-        'framework_project': get_project_148_data(registry_data),
-        'neighbors': get_framework_neighbors(registry_data)
+        'last_updated': head_data.get('last_updated', ''),
+        'framework_project': framework_project
     }
 
 if __name__ == "__main__":
@@ -108,16 +82,13 @@ if __name__ == "__main__":
     
     if stats:
         print(f"Total projects in MLF registry: {stats.get('total_projects', 0)}")
+        print(f"Total projects in MLF explicit head: {stats.get('head_count', 0)}")
+        print(f"Convergence Status: {'Converged' if stats.get('is_converged') else 'Diverged'}")
         
         framework = stats.get('framework_project')
         if framework:
-            print(f"\nProject 148 Found: {framework.get('title', 'Unknown')}")
+            print(f"\nProject 148 Found: {framework.get('name', framework.get('title', 'Unknown'))}")
             print(f"URL: {framework.get('url', 'N/A')}")
-            print(f"Type: {framework.get('type', 'N/A')}")
-        
-        print(f"\nType distribution:")
-        for type_name, count in stats.get('type_distribution', {}).items():
-            print(f"  {type_name}: {count}")
         
         print(f"\nRecent projects:")
         for project in stats.get('recent_projects', []):
