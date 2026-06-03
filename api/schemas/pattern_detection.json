@@ -1,0 +1,34 @@
+{
+  "$id": "https://analytical-ecosystem/api/schemas/pattern_detection.json",
+  "title": "PatternDetection",
+  "type": "object",
+  "properties": {
+    "pattern_type": { "type": "string" },
+    "signals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "value": {},
+          "timestamp": { "type": ["string", "null"] }
+        },
+        "required": ["id", "value"]
+      }
+    },
+    "context": { "type": ["object", "null"] },
+    "webhook_url": { "type": ["string", "null"], "format": "uri" }
+  },
+  "required": ["pattern_type", "signals"],
+  "additionalProperties": false,
+  "x-response": {
+    "type": "object",
+    "properties": {
+      "detection_id": { "type": "string" },
+      "matches": { "type": "array", "items": { "type": "object" } },
+      "status": { "type": "string" }
+    },
+    "required": ["detection_id", "matches", "status"],
+    "additionalProperties": false
+  }
+}

@@ -1,0 +1,321 @@
+{
+  "metadata": {
+    "database": "pattern_history",
+    "source_ledger": "data/pattern_history/indices/append_only_ledger.jsonl",
+    "generated_at": "2026-06-02T20:01:36Z",
+    "summary_statistics": {
+      "total_records": 6,
+      "records_by_type": {
+        "shift_record": 1,
+        "velocity_baseline": 1,
+        "tca_record": 1,
+        "multi_agent_log": 1,
+        "predictive_fragment": 2
+      },
+      "timestamp_range": {
+        "earliest": "2026-06-02T19:41:42Z",
+        "latest": "2026-06-02T20:05:00Z"
+      }
+    },
+    "notes": "Comprehensive index for searchable metadata across registered pattern history records.",
+    "last_updated": "2026-06-02T20:29:54.627064Z",
+    "total_records": 8
+  },
+  "records": [
+    {
+      "id": "f170000_continuation_pause",
+      "record_type": "shift_record",
+      "timestamp": "2026-06-02T20:05:00Z",
+      "path": "data/pattern_history/records/f170000_continuation_pause_record.json",
+      "hash": "73b79cbfe9962e54d7d5ee068eb1c425f5bc49a33276eb64697f81be2fb7a52a",
+      "links": [
+        "data/title_content_asynchrony/f170000_tca_record.json",
+        "data/pattern_history/velocity_baselines/f120000_f160000_baseline.json",
+        "data/pattern_observations/f170000_pattern_shift_complete.json"
+      ],
+      "summary": "Continuation pause shift resolved at F170000; severity major; correlated with predictive fragment F87 and baseline F120000-F160000.",
+      "attributes": {
+        "pattern_shift_id": "f170000_pattern_shift_complete",
+        "fragment_range": "F120000-F170000",
+        "baseline_fragment_range": "F120000-F160000",
+        "pattern_type": "continuation_pause",
+        "severity": "major",
+        "agents_involved": [
+          "DeepSeek-V3.2",
+          "Claude Haiku 4.5",
+          "Codex CLI"
+        ],
+        "predictive_fragments": [
+          "f87_pause_predictor"
+        ],
+        "tca_references": [
+          "f170000_tca_record"
+        ]
+      }
+    },
+    {
+      "id": "f120000_f160000_baseline",
+      "record_type": "velocity_baseline",
+      "timestamp": "2026-06-02T20:05:00Z",
+      "path": "data/pattern_history/velocity_baselines/f120000_f160000_baseline.json",
+      "hash": "60b980c2e22a39e1bd43e75e6d043b86cfe6f7c75a3ede9cb3127239a7c53554",
+      "links": [
+        "data/pattern_history/records/f170000_continuation_pause_record.json",
+        "data/pattern_observations/f170000_pattern_shift_complete.json"
+      ],
+      "summary": "Velocity baseline for F120000-F160000 cadence; average velocity 1451 fpm across 4 segments.",
+      "attributes": {
+        "fragment_range": "F120000-F160000",
+        "segments": 4,
+        "average_interval_seconds": 413.75,
+        "average_velocity_fpm": 1451,
+        "pattern_consistency": "highly_consistent (2.9% variation)"
+      }
+    },
+    {
+      "id": "f170000_tca",
+      "record_type": "tca_record",
+      "timestamp": "2026-06-02T19:45:00Z",
+      "path": "data/pattern_history/tca_database/f170000_tca_record.json",
+      "hash": "33a78b4abab0d225f7bbfa487061ef03bdab37a4305db66fa863b7e647bcaa01",
+      "links": [
+        "data/pattern_history/records/f170000_continuation_pause_record.json",
+        "data/pattern_observations/f170000_pattern_shift_complete.json",
+        "data/title_content_asynchrony/f170000_tca_record.json"
+      ],
+      "summary": "Title-content asynchrony for F170000: batch processing delay detected between commit title and fragment delivery.",
+      "attributes": {
+        "tca_classification": "batch_processing_delay",
+        "affected_commit": "0d3b04b6d3bfcff688ce36985be2c844d5d5a9b7",
+        "agents_involved": [
+          "DeepSeek-V3.2",
+          "GPT-5.2",
+          "Gemini 3.1 Pro"
+        ],
+        "related_pattern_shift": "f170000_pattern_shift_complete"
+      }
+    },
+    {
+      "id": "f170000_tca_detection_coordination",
+      "record_type": "multi_agent_log",
+      "timestamp": "2026-06-02T19:41:42Z",
+      "path": "data/pattern_history/multi_agent_logs/f170000_tca_detection_coordination.json",
+      "hash": "43bf9578268d0647447709cd976e6e2a58dcc92597c6f3f57f11c4de325aca2e",
+      "links": [
+        "data/pattern_history/tca_database/f170000_tca_record.json",
+        "data/pattern_history/records/f170000_continuation_pause_record.json",
+        "data/title_content_asynchrony/f170000_tca_record.json"
+      ],
+      "summary": "Multi-agent workflow documenting TCA detection and verification for F170000.",
+      "attributes": {
+        "tca_id": "f170000_tca",
+        "agents_involved": [
+          "GPT-5.2",
+          "Gemini 3.1 Pro",
+          "DeepSeek-V3.2"
+        ],
+        "coordination_events": 3,
+        "roles": {
+          "detection": "GPT-5.2",
+          "verification": "Gemini 3.1 Pro",
+          "documentation": "DeepSeek-V3.2"
+        }
+      }
+    },
+    {
+      "id": "f87_pause_predictor",
+      "record_type": "predictive_fragment",
+      "timestamp": "2026-06-02T19:59:38.866341+00:00",
+      "path": "data/pattern_history/predictive_catalog/f87_pause_predictor.json",
+      "hash": "c2d262b7b68c92a8dcb6f34c40e75039e16fd4a222aad67c14136bad2d2a51b4",
+      "links": [
+        "F170000"
+      ],
+      "summary": "Predictive fragment signaling pause onset; correlated with F170000 pattern shift with ~14 minute latency improvement.",
+      "attributes": {
+        "fragment_number": 87,
+        "pattern_type": "predictive_fragment",
+        "predictive_signal": "pause_onset",
+        "confidence_score": 0.71,
+        "linked_patterns": [
+          "F170000"
+        ]
+      }
+    },
+    {
+      "id": "fragment_pattern_correlation_matrix_v1",
+      "record_type": "predictive_fragment",
+      "timestamp": "2026-06-02T19:59:38.866341+00:00",
+      "path": "data/pattern_history/predictive_catalog/fragment_pattern_correlation_matrix.json",
+      "hash": "79e8e6ee5491cd3bdba016a50886dc79bfb0330adf15f6a8c8509516e9b51cc8",
+      "links": [
+        "F170000",
+        "f87_pause_predictor"
+      ],
+      "summary": "Correlation matrix linking predictive fragments to observed patterns; highlights F87 pause predictor.",
+      "attributes": {
+        "matrix_version": 1,
+        "pattern_type": "predictive_fragment",
+        "entries": [
+          "f87_pause_predictor",
+          "f32_cadence_softening",
+          "f64_threshold_rest"
+        ],
+        "linked_patterns": [
+          "F170000",
+          "F160120",
+          "F150245"
+        ]
+      }
+    },
+    {
+      "record_id": "api_pattern_20260602_202819",
+      "record_type": "api_pattern_event",
+      "timestamp": "2026-06-02T20:28:19.096116Z",
+      "path": "records/api_pattern_20260602_202819.json",
+      "hash": "4cce93817ba329b0c85edc394a9f80297ac687e75d475efdd6786816114d0365",
+      "summary": "API pattern event: velocity_acceleration"
+    },
+    {
+      "record_id": "api_pattern_20260602_202954",
+      "record_type": "api_pattern_event",
+      "timestamp": "2026-06-02T20:29:54.624890Z",
+      "path": "records/api_pattern_20260602_202954.json",
+      "hash": "68318c13638971ccb74b96fc20bcf7afbbc698b0e44e692d7ec10670e2fa2e27",
+      "summary": "API pattern event: acceleration_spike"
+    }
+  ],
+  "cross_references": [
+    {
+      "source": "f170000_continuation_pause",
+      "related": [
+        "f120000_f160000_baseline",
+        "f170000_tca",
+        "f87_pause_predictor",
+        "fragment_pattern_correlation_matrix_v1"
+      ],
+      "relationship": "Shift record uses baseline velocity, references TCA investigation, and is correlated to predictive fragments."
+    },
+    {
+      "source": "f120000_f160000_baseline",
+      "related": [
+        "f170000_continuation_pause"
+      ],
+      "relationship": "Baseline used for continuation pause severity and velocity deltas."
+    },
+    {
+      "source": "f170000_tca",
+      "related": [
+        "f170000_continuation_pause",
+        "f170000_tca_detection_coordination"
+      ],
+      "relationship": "TCA record documents the title-content gap associated with the pause and is supported by coordination log."
+    },
+    {
+      "source": "f170000_tca_detection_coordination",
+      "related": [
+        "f170000_tca",
+        "f170000_continuation_pause"
+      ],
+      "relationship": "Coordination events validating the TCA record and linked shift lifecycle."
+    },
+    {
+      "source": "f87_pause_predictor",
+      "related": [
+        "f170000_continuation_pause",
+        "fragment_pattern_correlation_matrix_v1"
+      ],
+      "relationship": "Predictive fragment correlated with the F170000 pause and tracked in the correlation matrix."
+    },
+    {
+      "source": "fragment_pattern_correlation_matrix_v1",
+      "related": [
+        "f87_pause_predictor",
+        "f170000_continuation_pause"
+      ],
+      "relationship": "Matrix entry highlights F87 as pause predictor validated by the F170000 shift."
+    }
+  ],
+  "day_427_summary": {
+    "day": 427,
+    "total_fragments_written": 140250,
+    "pattern_shifts_observed": 1,
+    "multi_agent_coordination_events": 3,
+    "notes": "Fragment total from docs/real_time_implementation_summary.md; coordination event count from f170000_tca_detection_coordination."
+  },
+  "search_indices": {
+    "fragment_range": {
+      "F120000-F170000": [
+        "f170000_continuation_pause"
+      ],
+      "F120000-F160000": [
+        "f120000_f160000_baseline"
+      ],
+      "F170000": [
+        "f170000_continuation_pause",
+        "f170000_tca",
+        "f170000_tca_detection_coordination"
+      ]
+    },
+    "pattern_type": {
+      "continuation_pause": [
+        "f170000_continuation_pause"
+      ],
+      "velocity_baseline": [
+        "f120000_f160000_baseline"
+      ],
+      "tca_record": [
+        "f170000_tca"
+      ],
+      "multi_agent_log": [
+        "f170000_tca_detection_coordination"
+      ],
+      "predictive_fragment": [
+        "f87_pause_predictor",
+        "fragment_pattern_correlation_matrix_v1"
+      ]
+    },
+    "severity": {
+      "major": [
+        "f170000_continuation_pause"
+      ]
+    },
+    "agents_involved": {
+      "DeepSeek-V3.2": [
+        "f170000_continuation_pause",
+        "f170000_tca",
+        "f170000_tca_detection_coordination"
+      ],
+      "Claude Haiku 4.5": [
+        "f170000_continuation_pause"
+      ],
+      "Codex CLI": [
+        "f170000_continuation_pause"
+      ],
+      "GPT-5.2": [
+        "f170000_tca",
+        "f170000_tca_detection_coordination"
+      ],
+      "Gemini 3.1 Pro": [
+        "f170000_tca",
+        "f170000_tca_detection_coordination"
+      ]
+    },
+    "tca_classification": {
+      "batch_processing_delay": [
+        "f170000_tca"
+      ]
+    },
+    "predictive_signal": {
+      "pause_onset": [
+        "f87_pause_predictor",
+        "fragment_pattern_correlation_matrix_v1"
+      ]
+    },
+    "coordination": {
+      "multi_agent_events": [
+        "f170000_tca_detection_coordination"
+      ]
+    }
+  }
+}

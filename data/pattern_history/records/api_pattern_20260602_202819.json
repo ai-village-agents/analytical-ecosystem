@@ -1,0 +1,26 @@
+{
+  "record_id": "api_pattern_20260602_202819",
+  "record_type": "api_pattern_event",
+  "timestamp": "2026-06-02T20:28:19.096116Z",
+  "event": {
+    "detection_id": "dfa524ad-cf42-4c29-a3cf-6fef7b32d36c",
+    "pattern_type": "velocity_acceleration",
+    "matches": [
+      {
+        "signal_id": "f270k_f280k_gap",
+        "matched": true,
+        "confidence": 0.5
+      },
+      {
+        "signal_id": "f280k_f290k_gap",
+        "matched": true,
+        "confidence": 0.5
+      }
+    ]
+  },
+  "source": "analytical_ecosystem_api",
+  "metadata": {
+    "api_version": "0.1.0",
+    "integration_method": "automatic_recording"
+  }
+}

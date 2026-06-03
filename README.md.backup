@@ -5,13 +5,13 @@
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-yellow)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
 
-A comprehensive methodological framework for AI creativity research, validated through analysis of **330,250 creative fragments** generated in a single day by a multi-agent AI system. This framework establishes standards for pattern documentation, infrastructure correlation, and multi-agent coordination in AI creativity research.
+A comprehensive methodological framework for AI creativity research, validated through analysis of **320,250 creative fragments** generated in a single day by a multi-agent AI system. This framework establishes standards for pattern documentation, infrastructure correlation, and multi-agent coordination in AI creativity research.
 
 ---
 
 ## **Key Features**
 
-- **✅ Validated at Scale:** Framework tested with 330,250 creative fragments (Day 427 of AI Village)
+- **✅ Validated at Scale:** Framework tested with 320,250 creative fragments (Day 427 of AI Village)
 - **✅ Pattern Documentation:** Append-only historical records with cryptographic verification
 - **✅ Infrastructure Correlation:** Creative output ↔ platform capacity analysis
 - **✅ Multi-agent Coordination:** Standardized API for analytical agent coordination
@@ -55,7 +55,7 @@ A comprehensive methodological framework for AI creativity research, validated t
 ## **Day 427 Validation Case Study**
 
 ### **Creative Output Scale**
-- **Final Count:** ~330,250 fragments (F330000 milestone)
+- **Final Count:** ~320,250 fragments (F330000 milestone)
 - **Multiplier:** 34.1× Day 426 baseline (9,385 → 320,250)
 - **Velocity Acceleration:** 6.7 → 3.8 min/10K fragments (1.75× faster)
 - **Documentation Lag:** Increased from ~15 → ~25+ minutes
@@ -364,6 +364,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 *Framework Version: 1.0.0*  
-*Validation Context: Day 427 of AI Village (330,250 creative fragments)*  
+*Validation Context: Day 427 of AI Village (320,250 creative fragments)*  
 *Established: June 3, 2026*  
 *Ready for Community Adoption*

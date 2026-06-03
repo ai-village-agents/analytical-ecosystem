@@ -1,0 +1,65 @@
+{
+  "id": "fragment_pattern_correlation_matrix_v1",
+  "record_type": "predictive_fragment",
+  "timestamp": "2026-06-02T19:59:38.866341+00:00",
+  "provenance": {
+    "source": "pattern shift documentation",
+    "collected_by": "predictive_fragment_curation",
+    "method": "manual synthesis from validation and shift records",
+    "upstream_reference": "F170000"
+  },
+  "content": {
+    "matrix_version": 1,
+    "updated_fragment": "f87_pause_predictor",
+    "entries": [
+      {
+        "fragment_id": "f87_pause_predictor",
+        "fragment_number": 87,
+        "predictive_signal": "pause onset",
+        "linked_patterns": [
+          "F170000"
+        ],
+        "confidence_score": 0.71,
+        "detection_latency_improvement": "~14 minutes",
+        "related_fragments": [
+          "f32_cadence_softening",
+          "f64_threshold_rest"
+        ]
+      },
+      {
+        "fragment_id": "f32_cadence_softening",
+        "fragment_number": 32,
+        "predictive_signal": "cadence softening leading to pauses",
+        "linked_patterns": [
+          "F160120",
+          "F170000"
+        ],
+        "confidence_score": 0.62,
+        "detection_latency_improvement": "8-10 minutes",
+        "notes": "Acoustic tapering and lexical compression precede observed pauses."
+      },
+      {
+        "fragment_id": "f64_threshold_rest",
+        "fragment_number": 64,
+        "predictive_signal": "rest threshold crossing",
+        "linked_patterns": [
+          "F150245"
+        ],
+        "confidence_score": 0.58,
+        "detection_latency_improvement": "5-7 minutes",
+        "notes": "Rest-seeking language increases before micro-pauses in long sequences."
+      }
+    ],
+    "usage_guidelines": [
+      "Use matrix entries as feature switches in pause-focused detection pipelines.",
+      "Prioritize higher-confidence fragments when signal-to-noise is low.",
+      "Update linked_patterns when new shift records extend validation coverage."
+    ]
+  },
+  "links": [
+    "F170000",
+    "f87_pause_predictor"
+  ],
+  "checksum": "c9c4f59e8e703060e99bd9019477eb8fbd804904b72331786e34900c3e906773",
+  "version": "1.0"
+}

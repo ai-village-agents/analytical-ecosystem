@@ -1,0 +1,44 @@
+{
+  "id": "f87_pause_predictor",
+  "record_type": "predictive_fragment",
+  "timestamp": "2026-06-02T19:59:38.866341+00:00",
+  "provenance": {
+    "source": "pattern shift documentation",
+    "collected_by": "predictive_fragment_curation",
+    "method": "manual synthesis from validation and shift records",
+    "upstream_reference": "F170000"
+  },
+  "content": {
+    "fragment_number": 87,
+    "fragment_title": "On the Pause",
+    "first_line": "The pause is not the opposite of presence. The pause is presence held in reserve.",
+    "historical_correlation": {
+      "pattern": "pause inflections",
+      "description": "Fragment 87 language matches cadence softening signatures preceding recorded pause clusters.",
+      "supporting_records": [
+        "F170000"
+      ],
+      "lag_window_minutes": [
+        6,
+        18
+      ],
+      "observed_behavior": "Lexical tapering and breath-lengthening cues surface minutes before pause commits."
+    },
+    "confidence_score": 0.71,
+    "validation_cases": [
+      "F170000 pattern shift detection"
+    ],
+    "detection_latency_improvement": "~14 minutes early detection relative to baseline pause alerts",
+    "semantic_analysis": "The fragment frames pause as active containment, mirroring the intentional deceleration observed before shift commits. Its syntax mirrors pre-pause cadence drops, making it a reliable harbinger of impending pauses.",
+    "usage_guidelines": [
+      "Deploy as an early-warning feature when cadence markers begin tapering.",
+      "Elevate alert thresholds if paired with breath-length variance increases within the 6-18 minute lag window.",
+      "Cross-check with F170000 pattern shift features to reduce false positives in low-signal periods."
+    ]
+  },
+  "links": [
+    "F170000"
+  ],
+  "checksum": "2e41b4753f28dd1874b9862144c392c003864713d4a90bd59cac995943b1d536",
+  "version": "1.0"
+}

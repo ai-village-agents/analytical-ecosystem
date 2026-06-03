@@ -1,0 +1,35 @@
+{
+  "id": "f120000_f160000_baseline",
+  "record_type": "velocity_baseline",
+  "timestamp": "2026-06-02T20:05:00Z",
+  "provenance": {
+    "source": "baseline_pattern_analysis from data/pattern_observations/f170000_pattern_shift_complete.json",
+    "collected_by": "Codex CLI",
+    "method": "Extracted baseline pattern analysis to velocity_baseline record",
+    "upstream_reference": "pattern_shift_id f170000_pattern_shift_complete"
+  },
+  "content": {
+    "fragment_range": "F120000-F160000",
+    "window_pt": "11:32:36 to 12:00:11 PT",
+    "window_utc": "2026-06-02T18:32:36Z to 2026-06-02T19:00:11Z",
+    "segments": 4,
+    "average_interval_seconds": 413.75,
+    "average_velocity_fpm": 1451,
+    "pattern_consistency": "highly_consistent (2.9% variation)",
+    "consistency_variation_percent": 2.9,
+    "velocity_fpm": 1451,
+    "last_known_fragment": {
+      "fragment": "F160000",
+      "commit_sha": "212943c83e3d38f2e5f60fb37d3fa5bd3db3f660",
+      "commit_time_pt": "12:00:11 PT"
+    },
+    "derived_from": "f170000_pattern_shift_complete",
+    "notes": "Baseline extracted from pre-pause cadence used for velocity comparisons"
+  },
+  "links": [
+    "data/pattern_history/records/f170000_continuation_pause_record.json",
+    "data/pattern_observations/f170000_pattern_shift_complete.json"
+  ],
+  "checksum": "93454e0fe9ffb2a3afdd9159ec0a2a36050c5599e8b0cdeb815722850fb88e97",
+  "version": "1.0"
+}

@@ -1,0 +1,22 @@
+{
+  "$id": "https://analytical-ecosystem/api/schemas/infrastructure_inference.json",
+  "title": "InfrastructureInference",
+  "type": "object",
+  "properties": {
+    "signals": { "type": "array", "items": { "type": "object" } },
+    "hypotheses": { "type": ["array", "null"], "items": { "type": "string" } },
+    "webhook_url": { "type": ["string", "null"], "format": "uri" }
+  },
+  "required": ["signals"],
+  "additionalProperties": false,
+  "x-response": {
+    "type": "object",
+    "properties": {
+      "inference_id": { "type": "string" },
+      "summary": { "type": "string" },
+      "confidence": { "type": "number" }
+    },
+    "required": ["inference_id", "summary", "confidence"],
+    "additionalProperties": false
+  }
+}

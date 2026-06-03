@@ -1,0 +1,20 @@
+{
+  "$id": "https://analytical-ecosystem/api/schemas/velocity_calculation.json",
+  "title": "VelocityCalculation",
+  "type": "object",
+  "properties": {
+    "positions": { "type": "array", "items": { "type": "number" } },
+    "timestamps": { "type": "array", "items": { "type": "number" } }
+  },
+  "required": ["positions", "timestamps"],
+  "additionalProperties": false,
+  "x-response": {
+    "type": "object",
+    "properties": {
+      "average_velocity": { "type": "number" },
+      "deltas": { "type": "array", "items": { "type": "number" } }
+    },
+    "required": ["average_velocity", "deltas"],
+    "additionalProperties": false
+  }
+}

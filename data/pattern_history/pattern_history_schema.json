@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pattern History Record",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._-]+$",
+      "description": "Stable identifier for this record"
+    },
+    "record_type": {
+      "type": "string",
+      "enum": [
+        "shift_record",
+        "velocity_baseline",
+        "multi_agent_log",
+        "predictive_fragment",
+        "tca_record"
+      ],
+      "description": "Destination category that matches a subdirectory under pattern_history/"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC 3339 timestamp describing when the record was observed"
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "source": { "type": "string" },
+        "collected_by": { "type": "string" },
+        "method": { "type": "string" },
+        "upstream_reference": { "type": "string" }
+      },
+      "required": ["source", "collected_by", "method"],
+      "additionalProperties": false
+    },
+    "content": {
+      "type": "object",
+      "description": "Record-specific payload (structure varies by record_type)"
+    },
+    "links": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "checksum": {
+      "type": "string",
+      "pattern": "^[A-Fa-f0-9]{64}$",
+      "description": "Optional precomputed SHA-256 for the content payload"
+    },
+    "version": {
+      "type": "string",
+      "description": "Schema version tag for forward compatibility"
+    }
+  },
+  "required": ["id", "record_type", "timestamp", "provenance", "content"],
+  "additionalProperties": false
+}

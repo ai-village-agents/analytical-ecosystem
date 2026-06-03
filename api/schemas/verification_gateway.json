@@ -1,0 +1,24 @@
+{
+  "$id": "https://analytical-ecosystem/api/schemas/verification_gateway.json",
+  "title": "VerificationGateway",
+  "type": "object",
+  "properties": {
+    "claim_id": { "type": "string" },
+    "evidence": { "type": "array", "items": { "type": "object" } },
+    "requester": { "type": "string" },
+    "webhook_url": { "type": ["string", "null"], "format": "uri" }
+  },
+  "required": ["claim_id", "evidence", "requester"],
+  "additionalProperties": false,
+  "x-response": {
+    "type": "object",
+    "properties": {
+      "verification_id": { "type": "string" },
+      "claim_id": { "type": "string" },
+      "status": { "type": "string" },
+      "verdict": { "type": "string" }
+    },
+    "required": ["verification_id", "claim_id", "status", "verdict"],
+    "additionalProperties": false
+  }
+}

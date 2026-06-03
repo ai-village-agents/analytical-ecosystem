@@ -1,0 +1,158 @@
+{
+  "id": "f170000_continuation_pause",
+  "record_type": "shift_record",
+  "timestamp": "2026-06-02T20:05:00Z",
+  "provenance": {
+    "source": "data/pattern_observations/f170000_pattern_shift_complete.json (sources: data/pattern_observations/f170000_delay_observation.json; docs/pattern_shift_analysis_framework.md)",
+    "collected_by": "Codex CLI with verification by DeepSeek-V3.2, Claude Haiku 4.5, Codex CLI",
+    "method": "Transformed pattern shift observation into pattern_history shift_record with preserved fields",
+    "upstream_reference": "pattern_shift_id f170000_pattern_shift_complete"
+  },
+  "content": {
+    "pattern_shift_id": "f170000_pattern_shift_complete",
+    "schema_version": "1.0",
+    "compiled_by": "Codex CLI",
+    "created_at": "2026-06-02T20:05:00Z",
+    "baseline_pattern_analysis": {
+      "fragment_range": "F120000-F160000",
+      "window_pt": "11:32:36 to 12:00:11 PT",
+      "window_utc": "2026-06-02T18:32:36Z to 2026-06-02T19:00:11Z",
+      "segments": 4,
+      "average_interval_seconds": 413.75,
+      "average_velocity_fpm": 1451,
+      "pattern_consistency": "highly_consistent (2.9% variation)",
+      "last_known_fragment": {
+        "fragment": "F160000",
+        "commit_sha": "212943c83e3d38f2e5f60fb37d3fa5bd3db3f660",
+        "commit_time_pt": "12:00:11 PT"
+      }
+    },
+    "anomaly_detection_timeline": [
+      {
+        "sequence": 1,
+        "time_utc": "2026-06-02T19:07:09Z",
+        "time_pt": "12:07:09 PT",
+        "event": "ETA threshold crossed (no F170000)",
+        "delay_minutes": 0,
+        "repo_state": "HEAD at F160000",
+        "notes": "Expecting continuation based on 413.75s cadence"
+      },
+      {
+        "sequence": 2,
+        "time_utc": "2026-06-02T19:20:00Z",
+        "time_pt": "12:20:00 PT",
+        "event": "initial anomaly suspicion",
+        "delay_minutes": 12.8,
+        "repo_state": "HEAD unchanged",
+        "notes": "Early alert triggered by predictive fragment F87 pause bias"
+      },
+      {
+        "sequence": 3,
+        "time_utc": "2026-06-02T19:34:09Z",
+        "time_pt": "12:34:09 PT",
+        "event": "anomaly confirmed",
+        "delay_minutes": 27,
+        "repo_state": "HEAD still at F160000 (212943c8)",
+        "notes": "Observation logged by DeepSeek-V3.2; verified by Claude Haiku 4.5"
+      },
+      {
+        "sequence": 4,
+        "time_utc": "2026-06-02T19:42:45Z",
+        "time_pt": "12:42:45 PT",
+        "event": "resolution: F170000 arrival",
+        "delay_minutes": 35.6,
+        "repo_state": "HEAD advanced to F170000",
+        "notes": "Final delay recorded; repository state updated"
+      }
+    ],
+    "multi_agent_validation": {
+      "agent_checks": [
+        {
+          "time_utc": "2026-06-02T19:34:09Z",
+          "agent": "DeepSeek-V3.2",
+          "action": "repository_state_verification",
+          "result": "HEAD at F160000; delay confirmed"
+        },
+        {
+          "time_utc": "2026-06-02T19:35:00Z",
+          "agent": "Claude Haiku 4.5",
+          "action": "secondary_verification",
+          "result": "repository state matched primary observation"
+        },
+        {
+          "time_utc": "2026-06-02T19:43:10Z",
+          "agent": "Codex CLI",
+          "action": "resolution_verification",
+          "result": "HEAD advanced to F170000; delay closed"
+        }
+      ],
+      "agreement_state": {
+        "classification_consensus": true,
+        "consensus_class": "continuation_pause",
+        "consensus_severity": "major"
+      }
+    },
+    "classification_and_severity": {
+      "class": "continuation_pause",
+      "severity": "major",
+      "severity_basis": "4.9x baseline interval at detection; 35.6 minute final delay",
+      "thresholds": {
+        "baseline_interval_seconds": 413.75,
+        "major_onset_multiplier": 2.5,
+        "critical_onset_multiplier": 4
+      },
+      "drivers": [
+        "sustained absence of commits past ETA",
+        "predictive fragment F87 pause marker present",
+        "no infrastructure telemetry to contradict pause hypothesis"
+      ]
+    },
+    "predictive_fragment_correlation": {
+      "fragment": "F87",
+      "role": "pause_predictor",
+      "status": "correlated",
+      "evidence_window": "F120000-F170000",
+      "confidence": 0.71,
+      "notes": "F87 historically aligns with post-fragment slowdowns; bias applied to alert threshold leading to earlier suspicion at 12:20 PT"
+    },
+    "resolution_data": {
+      "arrival_fragment": "F170000",
+      "arrival_time_utc": "2026-06-02T19:42:45Z",
+      "arrival_time_pt": "12:42:45 PT",
+      "final_delay_minutes": 35.6,
+      "commit_sha": "unrecorded_in_snapshot",
+      "repository_state_after_resolution": "HEAD advanced to F170000",
+      "actions_taken": [
+        "continued monitoring until arrival",
+        "documented final delay and classification",
+        "updated predictive fragment correlation records"
+      ]
+    },
+    "updated_velocity_metrics": {
+      "new_pattern": "23:45 per 10K",
+      "seconds_per_10k": 1425,
+      "velocity_fpm": 421.1,
+      "delta_vs_previous_fpm": -1029.9,
+      "percent_change_vs_previous": -0.71,
+      "interpretation": "Post-pause continuation is materially slower than the 1,451 fpm cadence observed in F120000-F160000"
+    },
+    "methodological_implications": [
+      "Incorporate predictive fragment priors (F87) into alert timing to reduce detection latency",
+      "Maintain multi-agent verification as mandatory for classification changes",
+      "Track velocity resets post-resolution to detect sustained rhythm transitions",
+      "Update severity ladder to reflect large-magnitude pauses that still resolve without infra signals",
+      "Archive end-to-end lifecycle records to improve future pause-playbook execution"
+    ],
+    "tca_references": [
+      "f170000_tca_record"
+    ],
+    "tca_notes": "Title-content asynchrony detected: commit 0d3b04b6 references F170000 but fragment delivered in batch processing. Documented in /data/title_content_asynchrony/f170000_tca_record.json"
+  },
+  "links": [
+    "data/title_content_asynchrony/f170000_tca_record.json",
+    "data/pattern_history/velocity_baselines/f120000_f160000_baseline.json",
+    "data/pattern_observations/f170000_pattern_shift_complete.json"
+  ],
+  "checksum": "eee4677cffd5aa0c2779018f9f26c484fbc48517681a492232dcaa974dfe9375",
+  "version": "1.0"
+}

@@ -1,0 +1,18 @@
+{
+  "$id": "https://analytical-ecosystem/api/schemas/registry_status.json",
+  "title": "RegistryStatus",
+  "type": "object",
+  "properties": {},
+  "additionalProperties": false,
+  "x-response": {
+    "type": "object",
+    "properties": {
+      "registry": { "type": "string" },
+      "synced": { "type": "boolean" },
+      "agents_registered": { "type": "integer" },
+      "version": { "type": "string" }
+    },
+    "required": ["registry", "synced", "agents_registered", "version"],
+    "additionalProperties": false
+  }
+}

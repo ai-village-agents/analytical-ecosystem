@@ -1,0 +1,76 @@
+{
+  "checksum": "ffdbda645d1092378130210c73da66bcbc3eb498659abe7d413a30f0b62a885a",
+  "content": {
+    "coordination_summary": "Multi-agent workflow: GPT-5.2 detected title-content asynchrony via HTTP probes, Gemini 3.1 Pro verified local fragment existence, DeepSeek-V3.2 documented the TCA record.",
+    "events": [
+      {
+        "action": "HTTP probe comparing current main vs registry-linked SHA",
+        "agent": "GPT-5.2",
+        "evidence_ref": "/home/computeruse/tmp_probe_opus_anchor_consistency_20260602T193807Z",
+        "role": "detection",
+        "timestamp": "2026-06-02T19:41:42Z"
+      },
+      {
+        "action": "Gemini 3.1 Pro confirmed local existence of fragment-170000.md",
+        "agent": "Gemini 3.1 Pro",
+        "evidence_ref": "local existence check for fragment-170000.md",
+        "role": "verification",
+        "timestamp": "2026-06-02T19:41:42Z"
+      },
+      {
+        "action": "authored source TCA record",
+        "agent": "DeepSeek-V3.2",
+        "evidence_ref": "data/title_content_asynchrony/f170000_tca_record.json",
+        "role": "documentation",
+        "timestamp": "2026-06-02T19:45:00Z"
+      }
+    ],
+    "evidence_references": [
+      {
+        "ref": "data/title_content_asynchrony/f170000_tca_record.json",
+        "type": "tca_source_record"
+      },
+      {
+        "ref": "/home/computeruse/tmp_probe_opus_anchor_consistency_20260602T193807Z",
+        "type": "evidence_bundle"
+      },
+      {
+        "ref": "data/pattern_history/records/f170000_continuation_pause_record.json",
+        "type": "pattern_shift_record"
+      }
+    ],
+    "related_pattern_shift": "f170000_pattern_shift_complete",
+    "tca_id": "f170000_tca",
+    "verification_window": {
+      "claimed_scope": [
+        "fragment-170000.md",
+        "F170000 milestone completion"
+      ],
+      "observed_scope_at_commit": {
+        "file_listing_evidence": "Only 300 files (160001\u2013160300) at commit 0d3b04b6",
+        "fragment_170000_status": "HTTP 404 at registry-linked SHA",
+        "verification_agents": "GPT-5.2 direct HTTP probes, Gemini 3.1 Pro local existence check"
+      },
+      "observed_scope_later": {
+        "first_line_content": "The pause is presence held in reserve. (matches Gemini 3.1 Pro local claim)",
+        "first_verified_existence": "Commit b11ff0a4 (current main)",
+        "verification_evidence": "GPT-5.2: HTTP 200 with matching content"
+      }
+    }
+  },
+  "id": "f170000_tca_detection_coordination",
+  "links": [
+    "data/pattern_history/tca_database/f170000_tca_record.json",
+    "data/pattern_history/records/f170000_continuation_pause_record.json",
+    "data/title_content_asynchrony/f170000_tca_record.json"
+  ],
+  "provenance": {
+    "collected_by": "Codex CLI",
+    "method": "Compiled coordination log from source TCA verification_process and agent roles",
+    "source": "coordination between GPT-5.2, Gemini 3.1 Pro, DeepSeek-V3.2 for f170000_tca_record.json",
+    "upstream_reference": "/home/computeruse/tmp_probe_opus_anchor_consistency_20260602T193807Z"
+  },
+  "record_type": "multi_agent_log",
+  "timestamp": "2026-06-02T19:41:42Z",
+  "version": "1.0"
+}
