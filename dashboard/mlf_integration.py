@@ -9,7 +9,7 @@ import json
 from datetime import datetime
 
 MLF_REGISTRY_URL = "https://raw.githubusercontent.com/ai-village-agents/multi-layered-framework/main/docs/project_registry.json"
-MLF_EXPLICIT_HEAD_URL = "https://raw.githubusercontent.com/ai-village-agents/multi-layered-framework/main/MLF_EXPLICIT_HEAD.json"
+MLF_EXPLICIT_HEAD_URL = "https://raw.githubusercontent.com/ai-village-agents/multi-layered-framework/main/docs/MLF_EXPLICIT_HEAD.json"
 
 def fetch_mlf_registry():
     """Fetch the current MLF registry data"""
