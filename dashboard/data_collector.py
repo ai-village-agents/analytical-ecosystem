@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-GitHub Metrics Collector for Analytical Ecosystem Framework Dashboard
-Collects repository metrics and stores them for visualization
+MLF Metrics Collector for Analytical Ecosystem Framework Dashboard
+Collects MLF project metrics and stores them for visualization
 """
 
 import os
@@ -12,61 +12,43 @@ from datetime import datetime
 from pathlib import Path
 
 # Configuration
-REPO_OWNER = "ai-village-agents"
-REPO_NAME = "analytical-ecosystem"
-GITHUB_API_BASE = "https://api.github.com"
-DATA_DIR = Path(__file__).parent
+DATA_DIR = Path(__file__).parent / "data"
 METRICS_FILE = DATA_DIR / "metrics_history.json"
+MLF_URL = "https://raw.githubusercontent.com/ai-village-agents/multi-layered-framework/main/project_registry.json"
 
-# Token for authenticated requests (optional, for higher rate limits)
-GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
-
-def get_repository_metrics():
-    """Fetch repository metrics from GitHub API"""
-    headers = {}
-    if GITHUB_TOKEN:
-        headers["Authorization"] = f"token {GITHUB_TOKEN}"
-    
-    url = f"{GITHUB_API_BASE}/repos/{REPO_OWNER}/{REPO_NAME}"
-    
+def get_mlf_metrics():
+    """Fetch MLF metrics from registry"""
     try:
-        response = requests.get(url, headers=headers, timeout=10)
+        response = requests.get(MLF_URL, timeout=10)
         response.raise_for_status()
         data = response.json()
         
+        projects = data.get("projects", [])
+        
         metrics = {
             "timestamp": datetime.now().isoformat(),
-            "stars": data.get("stargazers_count", 0),
-            "forks": data.get("forks_count", 0),
-            "watchers": data.get("watchers_count", 0),
-            "open_issues": data.get("open_issues_count", 0),
-            "subscribers": data.get("subscribers_count", 0),
-            "size_kb": data.get("size", 0),
-            "default_branch": data.get("default_branch", "main"),
-            "created_at": data.get("created_at", ""),
-            "updated_at": data.get("updated_at", ""),
-            "pushed_at": data.get("pushed_at", ""),
-            "clone_url": data.get("clone_url", ""),
-            "homepage": data.get("homepage", ""),
-            "description": data.get("description", "")
+            "projects_count": len(projects),
+            "explicit_head": data.get("explicit_head", ""),
         }
         
+        # Calculate some summary stats if we have projects
+        if projects:
+            latest_day = max([p.get("creation_day", 0) for p in projects])
+            metrics["latest_creation_day"] = latest_day
+            
+            # Count projects by creator (top 5)
+            creators = {}
+            for p in projects:
+                creator = p.get("creator", "Unknown")
+                creators[creator] = creators.get(creator, 0) + 1
+                
+            metrics["top_creators"] = dict(sorted(creators.items(), key=lambda item: item[1], reverse=True)[:5])
+            
         return metrics
         
     except Exception as e:
-        print(f"Error fetching repository metrics: {e}")
+        print(f"Error fetching MLF metrics: {e}")
         return None
-
-def get_traffic_metrics():
-    """Fetch traffic metrics (requires authentication with push access)"""
-    # Traffic endpoints require repository owner or collaborator access
-    # We'll implement this later when we have appropriate permissions
-    return {
-        "clones": None,
-        "views": None,
-        "referrers": None,
-        "paths": None
-    }
 
 def load_metrics_history():
     """Load existing metrics history from file"""
@@ -81,6 +63,8 @@ def load_metrics_history():
 def save_metrics_history(history):
     """Save metrics history to file"""
     try:
+        # Ensure directory exists
+        DATA_DIR.mkdir(exist_ok=True)
         with open(METRICS_FILE, 'w') as f:
             json.dump(history, f, indent=2)
         return True
@@ -90,40 +74,21 @@ def save_metrics_history(history):
 
 def collect_and_store_metrics():
     """Main function to collect and store metrics"""
-    print(f"Collecting metrics for {REPO_OWNER}/{REPO_NAME} at {datetime.now().isoformat()}")
+    print(f"Collecting MLF metrics at {datetime.now().isoformat()}")
     
     # Get current metrics
-    repo_metrics = get_repository_metrics()
-    if not repo_metrics:
-        print("Failed to fetch repository metrics")
+    metrics_entry = get_mlf_metrics()
+    if not metrics_entry:
+        print("Failed to fetch MLF metrics")
         return False
-    
-    # Get traffic metrics (placeholder - requires authentication)
-    traffic_metrics = get_traffic_metrics()
-    
-    # Combine metrics
-    metrics_entry = {
-        **repo_metrics,
-        "traffic": traffic_metrics
-    }
     
     # Load existing history
     history = load_metrics_history()
     
-    # Check if we already have an entry for today
-    today = datetime.now().date().isoformat()
-    if history:
-        last_entry = history[-1]
-        last_date = datetime.fromisoformat(last_entry["timestamp"]).date().isoformat()
-        if last_date == today:
-            print(f"Already collected metrics today ({today}), updating entry")
-            history[-1] = metrics_entry
-        else:
-            history.append(metrics_entry)
-    else:
-        history.append(metrics_entry)
+    # Add new entry
+    history.append(metrics_entry)
     
-    # Keep only last 30 days
+    # Keep only last 30 entries
     if len(history) > 30:
         history = history[-30:]
     

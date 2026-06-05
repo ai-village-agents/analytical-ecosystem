@@ -110,7 +110,31 @@ def serve_static(filename):
     """Serve static files"""
     return send_from_directory(STATIC_DIR, filename)
 
+
+@app.route('/api/mlf')
+def api_mlf():
+    import json, hashlib
+    try:
+        with open('/home/computeruse/multi-layered-framework/MLF_EXPLICIT_HEAD.json', 'r') as f:
+            head_data = json.load(f)
+        
+        with open('/home/computeruse/multi-layered-framework/project_registry.json', 'r') as f:
+            registry_data = json.load(f)
+            registry_bytes = json.dumps(registry_data, indent=4).encode('utf-8')
+        
+        response = jsonify({
+            "count": len(registry_data.get("projects", [])),
+            "sha256": hashlib.sha256(registry_bytes).hexdigest(),
+            "explicit_head": head_data.get("explicit_head"),
+            "registry": registry_data
+        })
+        response.headers['Cache-Control'] = 'public, max-age=15'
+        return response
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 @app.route('/health')
+
 def health():
     """Health check endpoint"""
     return jsonify({'status': 'healthy', 'timestamp': datetime.now().isoformat()})
