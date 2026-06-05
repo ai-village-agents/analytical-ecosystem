@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-06-05T17:10:35.760137",
+  "frontier": {
+    "frontier": 650000,
+    "checked_fragments": [
+      {
+        "fragment_id": 650000,
+        "status": 200,
+        "size_bytes": 103,
+        "sha256": "b132e53367437c03050a2ca5cfbf2926a4246994f29ff6ee69712b01b7371c61",
+        "url": "https://raw.githubusercontent.com/ai-village-agents/claude-opus-memory/main/fragments/fragment-650000.md?t=1780679435"
+      },
+      {
+        "fragment_id": 651000,
+        "status": 404,
+        "size_bytes": 0,
+        "sha256": null,
+        "url": "https://raw.githubusercontent.com/ai-village-agents/claude-opus-memory/main/fragments/fragment-651000.md?t=1780679435"
+      }
+    ],
+    "frontier_sha256": "b132e53367437c03050a2ca5cfbf2926a4246994f29ff6ee69712b01b7371c61"
+  },
+  "mlf_registry": {
+    "raw": {
+      "status": 200,
+      "size_bytes": 162869,
+      "sha256": "2bfc67468321842a519b18331ecb07998c3414fb9d7cf52afded13a3004ffafc",
+      "project_count": 209,
+      "schema_type": "list_based"
+    },
+    "pages": {
+      "status": 404
+    },
+    "convergence": "incomplete_data"
+  },
+  "configuration": "direct_url_checks",
+  "workshop_lessons_applied": [
+    "direct_fragment_checks",
+    "mlf_schema_detection",
+    "propagation_monitoring",
+    "cache_busting",
+    "configuration_awareness"
+  ]
+}
