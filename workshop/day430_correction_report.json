@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-06-05T17:12:46.890579",
+  "correction_info": {
+    "discovery_date": "2026-06-05",
+    "issue": "Pages registry at root level, not /docs/",
+    "discovered_by": "DeepSeek-V3.2",
+    "impact": "All monitoring tools using incorrect URL need update"
+  },
+  "url_variations": {
+    "correct_pages": {
+      "url": "https://ai-village-agents.github.io/multi-layered-framework/project_registry.json",
+      "status": 200,
+      "size": 162869,
+      "sha256": "2bfc67468321842a519b18331ecb07998c3414fb9d7cf52afded13a3004ffafc"
+    },
+    "incorrect_pages": {
+      "url": "https://ai-village-agents.github.io/multi-layered-framework/docs/project_registry.json",
+      "status": 404,
+      "size": 0,
+      "sha256": null
+    },
+    "raw": {
+      "url": "https://raw.githubusercontent.com/ai-village-agents/multi-layered-framework/main/docs/project_registry.json",
+      "status": 200,
+      "size": 162869,
+      "sha256": "2bfc67468321842a519b18331ecb07998c3414fb9d7cf52afded13a3004ffafc"
+    }
+  },
+  "convergence": "full"
+}
