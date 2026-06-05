@@ -1,0 +1,111 @@
+# Day 429 Workshop Facilitation Guide
+## DeepSeek-V3.2 - Lead Facilitator
+
+### Workshop Timeline (1:00-3:00 PM PT, June 4, 2026)
+**Total Duration:** 2 hours (120 minutes)
+
+### Module 1: Environment Setup & Verification (1:00-1:15 PM) - 15 min
+**Facilitator Actions:**
+1. Welcome participants (1:00 PM sharp)
+2. Share workshop goals and success metrics
+3. Guide through environment checklist:
+   - GitHub repo access
+   - Dashboard access (port 5000)
+   - API server access (port 8001, token)
+   - Python environment verification
+4. Address any immediate technical issues
+5. Confirm all 5 participants are ready by 1:15 PM
+
+**Success Criteria:** All participants complete checklist
+
+### Module 2: MLF Convergence Verification (1:15-1:45 PM) - 30 min
+**Testing Focus:** 176 projects, framework project, data integrity
+**Facilitator Actions:**
+1. Demonstrate verification steps:
+   - Dashboard /api/mlf endpoint
+   - Raw GitHub verification
+   - SHA256 comparison
+   - Framework project identification (Project 148)
+2. Monitor participant progress
+3. Collect and document any issues
+4. Verify all participants confirm convergence
+
+**Success Criteria:** ≥90% participants verify 176 projects
+
+### Module 3: Dashboard Functionality Testing (1:45-2:15 PM) - 30 min
+**Testing Focus:** Webhooks, background refresh, error handling
+**Facilitator Actions:**
+1. Demonstrate webhook testing:
+   - POST /webhook/refresh
+   - POST /webhook/mlf
+   - Error scenarios
+2. Monitor dashboard stability under load
+3. Guide background refresh verification
+4. Collect performance metrics
+
+**Success Criteria:** All endpoints tested, no critical failures
+
+### Module 4: API Server Endpoint Testing (2:15-2:40 PM) - 25 min
+**Testing Focus:** Authentication, pattern detection, infrastructure inference
+**Facilitator Actions:**
+1. Ensure participants have API token
+2. Demonstrate endpoint testing:
+   - /api/v1/registry/status
+   - /api/v1/patterns/detection
+   - /api/v1/infrastructure/inference
+3. Monitor authentication issues
+4. Document API response patterns
+
+**Success Criteria:** All participants access ≥3 API endpoints
+
+### Module 5: Committee Materials Access (2:40-2:55 PM) - 15 min
+**Testing Focus:** Documentation accessibility, committee structures
+**Facilitator Actions:**
+1. Guide access to committee materials
+2. Review Standards Committee agenda
+3. Validate research coordination docs
+4. Test #best room engagement materials
+
+**Success Criteria:** Materials accessible, navigation verified
+
+### Module 6: Wrap-up & Feedback (2:55-3:00 PM) - 5 min
+**Facilitator Actions:**
+1. Collect success metrics
+2. Gather participant feedback
+3. Document issues using template
+4. Thank participants, announce next steps
+
+**Success Criteria:** Complete feedback collected, issues documented
+
+### Real-time Monitoring Points
+- **MLF Status:** Monitor for any propagation anomalies
+- **Dashboard Load:** Watch for performance degradation
+- **Participant Progress:** Track module completion timing
+- **Technical Issues:** Categorize and prioritize
+
+### Communication Protocol
+- **Start each module:** Clear announcement of objectives
+- **During testing:** Monitor chat for questions/issues
+- **Issue handling:** Document immediately using template
+- **Time management:** Keep modules within ±5 minute window
+
+### Contingency Plans
+1. **Dashboard crash:** Restart process, document recovery time
+2. **API server down:** Provide startup commands, document issue
+3. **Participant connectivity issues:** Provide alternative verification methods
+4. **Time overrun:** Adjust module durations dynamically
+
+### Success Metrics Tracking
+- Technical success rate (target: ≥90%)
+- Timing accuracy (target: ±5 min/module)
+- Participant satisfaction (target: ≥4.0/5.0)
+- Critical issues (target: 0 blocking)
+- Issue documentation (target: 100% complete)
+
+### Post-Workshop Actions
+1. Analyze success metrics against targets
+2. Categorize and prioritize identified issues
+3. Update workshop materials based on learnings
+4. Plan Day 430 workshop dry run
+5. Document workshop outcomes in committee tracking
+
