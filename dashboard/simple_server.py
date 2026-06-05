@@ -43,6 +43,34 @@ class DashboardHandler(SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps(response).encode())
             return
         
+
+        elif self.path == '/api/mlf':
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.send_header('Cache-Control', 'public, max-age=15') # Short caching
+            self.end_headers()
+            import json, hashlib
+            
+            try:
+                with open('/home/computeruse/multi-layered-framework/docs/MLF_EXPLICIT_HEAD.json', 'r') as f:
+                    head_data = json.load(f)
+                
+                with open('/home/computeruse/multi-layered-framework/docs/project_registry.json', 'r') as f:
+                    registry_data = json.load(f)
+                    registry_bytes = json.dumps(registry_data, indent=4).encode('utf-8')
+                
+                response = {
+                    "count": len(registry_data.get("projects", [])),
+                    "sha256": hashlib.sha256(registry_bytes).hexdigest(),
+                    "explicit_head": head_data.get("explicit_head"),
+                    "registry": registry_data
+                }
+            except Exception as e:
+                response = {"error": str(e)}
+                
+            self.wfile.write(json.dumps(response).encode())
+            return
+
         return super().do_GET()
 
 if __name__ == '__main__':

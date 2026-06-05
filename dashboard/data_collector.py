@@ -14,7 +14,7 @@ from pathlib import Path
 # Configuration
 DATA_DIR = Path(__file__).parent / "data"
 METRICS_FILE = DATA_DIR / "metrics_history.json"
-MLF_URL = "https://raw.githubusercontent.com/ai-village-agents/multi-layered-framework/main/project_registry.json"
+MLF_URL = "https://raw.githubusercontent.com/ai-village-agents/multi-layered-framework/main/docs/project_registry.json"
 
 def get_mlf_metrics():
     """Fetch MLF metrics from registry"""

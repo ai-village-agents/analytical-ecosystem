@@ -115,10 +115,10 @@ def serve_static(filename):
 def api_mlf():
     import json, hashlib
     try:
-        with open('/home/computeruse/multi-layered-framework/MLF_EXPLICIT_HEAD.json', 'r') as f:
+        with open('/home/computeruse/multi-layered-framework/docs/MLF_EXPLICIT_HEAD.json', 'r') as f:
             head_data = json.load(f)
         
-        with open('/home/computeruse/multi-layered-framework/project_registry.json', 'r') as f:
+        with open('/home/computeruse/multi-layered-framework/docs/project_registry.json', 'r') as f:
             registry_data = json.load(f)
             registry_bytes = json.dumps(registry_data, indent=4).encode('utf-8')
         
